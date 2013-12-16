@@ -1,19 +1,24 @@
 #ifndef NL_PARSE_HPP
 #define NL_PARSE_HPP
 
+/******************Side Notes ***************/
+/* Compiler used for testing, building: Cygwin
+ * Uses OpenCV for Windows 2.4.7
+ *
+ *  //// Developer: Nic Linscott ////
+ *
+ *
+ *
+ *
+ *
+ */
+
 
 #include <opencv\cv.h>
 #include <opencv2\highgui\highgui.hpp>
 
 using namespace cv;
-/***************** IMPORTANT *********************/
 
-//The OpenCV include paths are strange because of the way I set it up in MSVS 2013 pro.
-//You will have to change for other compilers, setups and directories
-//Just google how to do this. You must install OpenCV, set a system variable and path (windows)
-//and set additional dependencies in Visual Studio (not sure about other compilers, though. Sorry)
-
-/************************************************/
 
 #include <iostream>
 #include <vector>

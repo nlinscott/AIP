@@ -37,7 +37,7 @@ void Parse::splitX(char* a){
 
 void Parse::CreateNewImage(char i){
 	Mat temp;
-	std::string img = i + "NewImage" + Get_str_dimensions();
+	std::string img = i + "NewImage" + Get_str_dimensions() + ".png";
 
 	//PNG compression parameters
 	vector<int> compression_params;
