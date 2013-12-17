@@ -38,7 +38,7 @@ Dimension to output:
 
 Example:
 =======
-> AIP exampleImage.jpg 320x210 1000x1000 10x10 
+    AIP exampleImage.jpg 320x210 1000x1000 10x10 
   
 Notes:
 ======  
