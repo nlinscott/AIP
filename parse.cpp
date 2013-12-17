@@ -17,7 +17,7 @@ Parse::Parse(char* imageName){
 }
 
 void Parse::splitX(char* a){
-
+	// if image location is invalid
 	if(!image.data){
 		std::cout<< "Image not found. Check Spelling and file location. Terminating.\n";
 		exit(0);
@@ -38,20 +38,27 @@ void Parse::splitX(char* a){
 		if (flagx){ temp_height += temp[i]; }
 		++i;
 	}
+	//if x was never found -> syntax error
 	if (!flagx){
-		std::cout<<"Syntax Error. Dimension delimiter 'x' not found in one or more arguments. Terminating.\n.";
+		std::cout<<"Syntax Error. Dimension delimiter 'x' not found in one or more arguments. Terminating.\n";
 		exit(0);
 	}
 
 		int_width = atoi(temp_width.c_str()); //converts std::string to int and assigns it to each dimension
 		int_height = atoi(temp_height.c_str());
+		//invalid width or height
 		if(int_width == 0 || int_height == 0){
 			std::cout << "Dimensions of all images must be greater than 0.";
 			std::cout<< " Some images may have been created for valid arguments.\n";
 			std::cout<< "Terminating.\n";
 			exit(0);
 		}
-
+		if(int_width > 4000 || int_height > 4000){
+					std::cout << "Dimensions too large (this is justa prototype), use between 0 and 4000";
+					std::cout<< " Some images may have been created for valid arguments.\n";
+					std::cout<< "Terminating.\n";
+					exit(0);
+				}
 
 	str_width = temp_width; //assigns temp to private members
 	str_height = temp_height; // used in file naming conventions

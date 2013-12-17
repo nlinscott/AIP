@@ -9,8 +9,9 @@ int main(int argc, char* argv[]){
 	//std::cout << argv[0] << argv[1] << argv[2] << std::endl;
 	if(argc < 3){
 		std::cout<< "Error!\n";
-		std::cout<< "Only two parameters specified.\n";
+		std::cout<< "Not enough parameters specified.\n";
 		std::cout<< "Must have AIP, then the image location, then dimensions.\n";
+		std::cout<< "Dimensions for this prototype must be within 0 and 4000.\n";
 		std::cout<< "Example Syntax:\n";
 		std::cout<< "AIP test.jpg 210x300 400x400 150x150\n";
 		exit(0);
