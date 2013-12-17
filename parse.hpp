@@ -34,7 +34,7 @@ public:
 
 	void splitX(char*);
 
-	void CreateNewImage(char);
+	void CreateNewImage();
 
 	std::string Get_str_dimensions(){ return str_width + "x" + str_height; };
 
@@ -49,6 +49,7 @@ private:
 	std::string str_width; 
 	std::string str_height;
 
+	vector<int> compression_params; //defualt is PNG compression
 
 	Mat image;
 };

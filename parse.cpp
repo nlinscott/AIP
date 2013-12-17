@@ -1,23 +1,33 @@
 #include "parse.hpp"
 
 Parse::Parse(){
-
-	int_width = 0;
-	int_height = 0;
+	//This default constructor does not work with images.
+	//You must use the char* constructor.
+	//This is constructor exists for syntax/semantics reasons
+	int_width = 10;
+	int_height = 10;
+	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
 }
 Parse::Parse(char* imageName){
 	
 	image = imread(imageName,1);
-	int_width = 0;
-	int_height = 0;
+	int_width = 10;
+	int_height = 10;
+	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
 }
 
 void Parse::splitX(char* a){
+
+	if(!image.data){
+		std::cout<< "Image not found. Check Spelling and file location. Terminating.\n";
+		exit(0);
+		}
+
 	bool flagx = false; // flag lets us know when 'x' is hit, skips iteration
 	std::string temp = a;
 
 	std::string temp_width;
-	std::string temp_height; //string width and height
+	std::string temp_height; //temporary string width and height
 	
 
 	int i = 0;
@@ -28,22 +38,38 @@ void Parse::splitX(char* a){
 		if (flagx){ temp_height += temp[i]; }
 		++i;
 	}
-	str_width = temp_width;
-	str_height = temp_height;
+	if (!flagx){
+		std::cout<<"Syntax Error. Dimension delimiter 'x' not found in one or more arguments. Terminating.\n.";
+		exit(0);
+	}
 
-	int_width = atoi(temp_width.c_str()); //converts std::string to int and assigns it to each dimension
-	int_height = atoi(temp_height.c_str());
+		int_width = atoi(temp_width.c_str()); //converts std::string to int and assigns it to each dimension
+		int_height = atoi(temp_height.c_str());
+		if(int_width == 0 || int_height == 0){
+			std::cout << "Dimensions of all images must be greater than 0.";
+			std::cout<< " Some images may have been created for valid arguments.\n";
+			std::cout<< "Terminating.\n";
+			exit(0);
+		}
+
+
+	str_width = temp_width; //assigns temp to private members
+	str_height = temp_height; // used in file naming conventions
+
+
 }
 
-void Parse::CreateNewImage(char i){
-	Mat temp;
-	std::string img = i + "NewImage" + Get_str_dimensions() + ".png";
+void Parse::CreateNewImage(){
 
-	//PNG compression parameters
-	vector<int> compression_params;
-	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+	Mat temp;
+
+	std::string img = "NewImage" + Get_str_dimensions() + ".png";
+
 	
+
 	//Resizes and saves it as a new image
+
+	//width, height and compresion parameters are all private
 		resize(image, temp, Size(int_width, int_height), 0, 0);
 		imwrite(img, temp, compression_params);
 	
