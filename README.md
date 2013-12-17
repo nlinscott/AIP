@@ -15,13 +15,30 @@ Android Image Processor CLI
 
 SYNTAX:
 ======
-*its a Command Line Interface. Deal with it.
+This program uses a command line interface.
 
-  Enter in an image name and the dimensions you want for that image.
+Enter in an image name and the dimensions you want for that image. 
+
+Calling the executable:
+
+    AIP
+
+Image Name:
+
+    exampleImage.jpg
+  Or
+
+    C:\users\Bob\Pictures\exampleImage.jpg
+    
+Dimension to output:
+
+    250x250
+    
+
 
 Example:
 =======
-    > AIP exampleImage.jpg 320x210 1000x1000 10x10 
+> AIP exampleImage.jpg 320x210 1000x1000 10x10 
   
 Notes:
 ======  
