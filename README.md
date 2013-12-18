@@ -30,9 +30,9 @@ Image Name:
 
     C:\users\Bob\Pictures\exampleImage.jpg
     
-Dimension to output:
+Dimension(s) to output:
 
-    250x250
+    250x250 1000x1000 362x179
     
 
 
@@ -44,4 +44,4 @@ Notes:
 ======  
   Currently, it has only been tested with .jpg files. Im sure it will work with most file types since OpenCV is so versitle. 
   
-  Since this is meant to be used in Android development, it only outputs .PNG files. This can be changed by whoever wants to compile this themselves. For simplicity reasons and proff of concept, it only outputs .PNG images.
+  Since this is meant to be used in Android development, it only outputs .PNG files. This can be changed by whoever wants to compile this themselves. For simplicity reasons and proof of concept, it only outputs .PNG images.
