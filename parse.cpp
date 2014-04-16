@@ -7,13 +7,15 @@ Parse::Parse(){
 	int_width = 10;
 	int_height = 10;
 	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+	compression_params.push_back(1);
 }
 Parse::Parse(char* imageName){
 	
-	image = imread(imageName,1);
+	image = imread(imageName,-1);
 	int_width = 10;
 	int_height = 10;
 	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+	compression_params.push_back(1);
 }
 
 void Parse::splitX(char* a){
@@ -54,7 +56,7 @@ void Parse::splitX(char* a){
 			exit(0);
 		}
 		if(int_width > 4000 || int_height > 4000){
-					std::cout << "Dimensions too large (this is justa prototype), use between 0 and 4000";
+					std::cout << "Dimensions too large , use between 0 and 4000";
 					std::cout<< " Some images may have been created for valid arguments.\n";
 					std::cout<< "Terminating.\n";
 					exit(0);
@@ -72,14 +74,13 @@ void Parse::CreateNewImage(){
 
 	std::string img = "NewImage" + Get_str_dimensions() + ".png";
 
-	
+
 
 	//Resizes and saves it as a new image
-
 	//width, height and compresion parameters are all private
 		resize(image, temp, Size(int_width, int_height), 0, 0);
 		imwrite(img, temp, compression_params);
-	
+
 }
 
 
