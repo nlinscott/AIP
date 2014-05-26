@@ -43,7 +43,7 @@ Example:
 Other Commands:
 ==============
 The -abi command will output 4 images for each screen density.
-    AIP exampleImage.png -abi
+    >AIP exampleImage.png -abi
 
 Notes:
 ======  
