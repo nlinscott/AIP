@@ -42,10 +42,12 @@ Example:
     
 Other Commands:
 ===============
+This creates an Action Bar Icon for each screen density.
 	AIP exampleImage.jpg -abi
-		This creates an Action Bar Icon for each screen density. 
-	AIP -help
-		Displays syntax information.
+    
+Displays syntax information.
+    AIP -help
+		
   
 Notes:
 ======  
