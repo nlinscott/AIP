@@ -38,14 +38,17 @@ Dimension(s) to output:
 
 Example:
 =======
+
     AIP exampleImage.jpg 320x210 1000x1000 10x10 
     
 Other Commands:
 ===============
 This creates an Action Bar Icon for each screen density.
+
     AIP exampleImage.jpg -abi
     
 Displays syntax information.
+
     AIP -help
 		
   
