@@ -21,10 +21,19 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include <string>
+#include <string.h>
 
 using namespace cv;
 
+
+	static const int MDPI = 32;
+	static const int HDPI = 48;
+	static const int XHDPI = 64;
+	static const int XXHDPI = 96;
+	static const std::string STR_MDPI = "MDPI-32";
+	static const std::string STR_HDPI = "HDPI-48";
+	static const std::string STR_XHDPI = "XHDPI-64";
+	static const std::string STR_XXHDPI = "XXHDPI-96";
 
 class ImageProperties{
 
@@ -82,7 +91,9 @@ public:
 	~ImageIO();
 
 	void saveNewImage();
+	void saveLogo(const int, const std::string);
 	void splitX(char*);
+
 
 private:
 
@@ -90,6 +101,20 @@ private:
 	Image* img;
 
 };
+
+class AndroidDPI{
+public:
+	AndroidDPI(): logo(0){};
+	AndroidDPI(char*);
+	~AndroidDPI();
+	void generateLogos();
+
+private:
+	ImageIO* logo;
+
+};
+
+
 
 
 

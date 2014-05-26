@@ -1,5 +1,17 @@
 #include "aip.hpp"
 
+AndroidDPI::AndroidDPI(char* fileName){
+	logo = new ImageIO(fileName);
+}
+void AndroidDPI::generateLogos(){
+		logo->saveLogo(MDPI, STR_MDPI);
+		logo->saveLogo(HDPI, STR_HDPI);
+		logo->saveLogo(XHDPI, STR_XHDPI);
+		logo->saveLogo(XXHDPI, STR_XXHDPI);
+}
+AndroidDPI::~AndroidDPI(){
+	if(logo)delete logo;
+}
 
 ImageIO::ImageIO(char* fileName){
 	img = new Image(fileName);
@@ -34,9 +46,9 @@ void ImageIO::splitX(char* properties){
 		if (flagx){ temp_height += temp[i]; }
 		++i;
 	}
-	//if x was never found -> syntax error
+	//if x was never found = syntax error
 	if (!flagx){
-		std::cout<<"Syntax Error. Dimension delimiter 'x' not found in one or more arguments. Terminating.\n";
+		std::cout<<"Syntax Error. Dimension delimiter 'x' not found in one or more arguments.\n\n Did you mistype a command? Type AIP -help for syntax. Terminating.\n";
 		exit(0);
 	}
 
@@ -52,7 +64,7 @@ void ImageIO::splitX(char* properties){
 		exit(0);
 
 	}else if(width > 4000 || height > 4000){
-		std::cout << "Dimensions too large , use between 0 and 4000";
+		std::cout << "Dimensions too large, use between 0 and 4000.";
 		std::cout<< " Some images may have been created for valid arguments.\n";
 		std::cout<< "Terminating.\n";
 		exit(0);
@@ -78,9 +90,21 @@ void ImageIO::saveNewImage(){
 	imwrite(file, temp, compression_params);
 
 }
-ImageIO::~ImageIO(){
-	delete img;
+void ImageIO::saveLogo(const int res, const std::string outFile){
+	Mat temp;
+
+	std::string file = outFile + ".png";
+
+	//copies image to 'temp' with new size
+	resize( img->getRawImage(), temp, Size(res,res), 0, 0);
+	//saves temp image without overwriting original
+	imwrite(file, temp, compression_params);
+
 }
+ImageIO::~ImageIO(){
+	if(img) delete img;
+}
+
 Image::Image(char* fileName){
 
 	imageFile = imread(fileName,-1);
@@ -88,7 +112,7 @@ Image::Image(char* fileName){
 
 }
 Image::~Image(){
-	delete properties;
+	if(properties) delete properties;
 }
 
 ImageProperties::ImageProperties(){
@@ -97,3 +121,4 @@ ImageProperties::ImageProperties(){
 	setStringDimensionsProperty("0","0");
 
 }
+
