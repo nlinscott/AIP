@@ -41,16 +41,12 @@ Example:
     AIP exampleImage.jpg 320x210 1000x1000 10x10 
     
 Other Commands:
-===============
-This creates an Action Bar Icon for each screen density.
-	AIP exampleImage.jpg -abi
-	
-Displays syntax information.
-	AIP -help
-		
-  
+==============
+The -abi command will output 4 images for each screen density.
+    AIP exampleImage.png -abi
+
 Notes:
 ======  
-  Currently, it has only been tested with .jpg files. Im sure it will work with most file types since OpenCV is so versitle. 
+  Currently, it has only been tested with .jpg and .png files. Im sure it will work with most file types since OpenCV is so versitle. 
   
   Since this is meant to be used in Android development, it only outputs .PNG files. This can be changed by whoever wants to compile this themselves. For simplicity reasons and proof of concept, it only outputs .PNG images.
