@@ -42,8 +42,9 @@ Example:
     
 Other Commands:
 ==============
-The -abi command will output 4 images for each screen density.
-    >AIP exampleImage.png -abi
+This command allows the user to generate an ActionBar icon for each screen density.
+
+    
 
 Notes:
 ======  
