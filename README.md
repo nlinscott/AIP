@@ -41,7 +41,6 @@ Example:
     AIP exampleImage.jpg 320x210 1000x1000 10x10 
     
 Other Commands:
-<<<<<<< HEAD
 ===============
 This creates an Action Bar Icon for each screen density.
 	AIP exampleImage.jpg -abi
@@ -50,13 +49,6 @@ Displays syntax information.
     AIP -help
 		
   
-=======
-==============
-This command allows the user to generate an ActionBar icon for each screen density.
-
-    
-
->>>>>>> 97e1ba8f95d79cfc329392fa191148cc1756bb8e
 Notes:
 ======  
   Currently, it has only been tested with .jpg and .png files. Im sure it will work with most file types since OpenCV is so versitle. 
