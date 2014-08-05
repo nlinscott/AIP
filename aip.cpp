@@ -1,24 +1,63 @@
 #include "aip.hpp"
 
-AndroidDPI::AndroidDPI(char* fileName){
-	logo = new ImageIO(fileName);
+AndroidDPI::AndroidDPI(char* filePath, std::string name){
+
+	logo = new ImageIO(filePath);
+	imageName = name;
+	mdpi = 32;
+	hdpi = 48;
+	xhdpi = 64;
+	xxhdpi = 96;
+	dir_mdpi = "drawable-mdpi\\";
+	dir_hdpi = "drawable-hdpi\\";
+	dir_xhdpi = "drawable-xhdpi\\";
+	dir_xxhdpi = "drawable-xxhdpi\\";
 }
+
 void AndroidDPI::generateLogos(){
-		logo->saveLogo(MDPI, STR_MDPI);
-		logo->saveLogo(HDPI, STR_HDPI);
-		logo->saveLogo(XHDPI, STR_XHDPI);
-		logo->saveLogo(XXHDPI, STR_XXHDPI);
+
+		logo->saveLogo(mdpi, concatenateFilePath(dir_mdpi));
+		logo->saveLogo(hdpi, concatenateFilePath(dir_hdpi));
+		logo->saveLogo(xhdpi, concatenateFilePath(dir_xhdpi));
+		logo->saveLogo(xxhdpi, concatenateFilePath(dir_xxhdpi));
 }
+
+std::string AndroidDPI::concatenateFilePath(std::string dir){
+	if( doesDirExist(dir) ){
+		std::string outPath = dir + imageName;
+		//std::cout << outPath + "\n\n";
+		return outPath;
+	}else{
+		std::cout << "Cannot find '" << dir << "'. The -abi command must be used within an Android res folder.\n";
+		exit(0);
+	}
+
+}
+
+bool AndroidDPI::doesDirExist(std::string dir){
+
+	DWORD fileType = GetFileAttributes(dir.c_str());
+	if (fileType == INVALID_FILE_ATTRIBUTES){
+	    //invalid path
+		return false;
+	}else if(fileType & FILE_ATTRIBUTE_DIRECTORY){
+		//drawable-* directory exists
+	    return true;
+	}
+
+	return false;
+}
+
 AndroidDPI::~AndroidDPI(){
 	if(logo)delete logo;
 }
 
 ImageIO::ImageIO(char* fileName){
 	img = new Image(fileName);
-
 	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
 	compression_params.push_back(1);
 }
+
 void ImageIO::splitX(char* properties){
 
 
@@ -76,8 +115,8 @@ void ImageIO::splitX(char* properties){
 	img->setStringDimensions(temp_width, temp_height);
 
 
-
 }
+
 void ImageIO::saveNewImage(){
 
 	Mat temp;
@@ -90,17 +129,17 @@ void ImageIO::saveNewImage(){
 	imwrite(file, temp, compression_params);
 
 }
-void ImageIO::saveLogo(const int res, const std::string outFile){
-	Mat temp;
 
-	std::string file = outFile + ".png";
+void ImageIO::saveLogo(const int res, std::string outFile){
+	Mat temp;
 
 	//copies image to 'temp' with new size
 	resize( img->getRawImage(), temp, Size(res,res), 0, 0);
 	//saves temp image without overwriting original
-	imwrite(file, temp, compression_params);
+	imwrite(outFile, temp, compression_params);
 
 }
+
 ImageIO::~ImageIO(){
 	if(img) delete img;
 }
@@ -111,6 +150,7 @@ Image::Image(char* fileName){
 	properties = new ImageProperties();
 
 }
+
 Image::~Image(){
 	if(properties) delete properties;
 }

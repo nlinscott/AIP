@@ -17,23 +17,14 @@
 #include <opencv\cv.h>
 #include <opencv2\highgui\highgui.hpp>
 
-
+#include <windows.h>
 #include <iostream>
-#include <list>
+#include <fstream>
 #include <vector>
 #include <string.h>
 
 using namespace cv;
 
-
-	static const int MDPI = 32;
-	static const int HDPI = 48;
-	static const int XHDPI = 64;
-	static const int XXHDPI = 96;
-	static const std::string STR_MDPI = "MDPI-32";
-	static const std::string STR_HDPI = "HDPI-48";
-	static const std::string STR_XHDPI = "XHDPI-64";
-	static const std::string STR_XXHDPI = "XXHDPI-96";
 
 class ImageProperties{
 
@@ -81,7 +72,6 @@ private:
 	Mat imageFile;
 };
 
-
 class ImageIO{
 
 public:
@@ -94,28 +84,46 @@ public:
 	void saveLogo(const int, const std::string);
 	void splitX(char*);
 
-
 private:
-
 	vector<int> compression_params; //default is PNG compression
 	Image* img;
 
 };
 
-class AndroidDPI{
+class Drawables{
+
+ protected:
+
+	//dimensions
+     int mdpi;
+     int hdpi;
+     int xhdpi;
+	 int xxhdpi;
+
+	 //files
+	 std::string dir_mdpi;
+	 std::string dir_hdpi;
+	 std::string dir_xhdpi;
+	 std::string dir_xxhdpi;
+	 std::string imageName;
+
+};
+
+class AndroidDPI : public Drawables{
 public:
 	AndroidDPI(): logo(0){};
-	AndroidDPI(char*);
+	AndroidDPI(char*, std::string);
 	~AndroidDPI();
 	void generateLogos();
 
 private:
+
+	std::string concatenateFilePath(std::string dir);
+	bool doesDirExist(std::string dir);
+
 	ImageIO* logo;
 
 };
-
-
-
 
 
 
