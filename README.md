@@ -43,11 +43,23 @@ Example:
     
 Other Commands:
 ===============
-This creates an Action Bar Icon for each screen density.
+This creates an Action Bar Icon as well as the app logo for each screen density.
 
     AIP exampleImage.jpg -abi
     
-Displays syntax information.
+Upon running this command, you will be prompted to name the logo. It must be a valid name and have a valid image extension such as .PNG, .JPG, .JPEG, .TIFF. converting from one to another shouldn't be a problem.
+
+An example of this would be:
+
+    AIP exampleImage.jpg -abi
+    ...
+    ...
+    myNewLogo.png
+    
+It only requires one name because Android drawables are named the same thing but accessed based on the devices screen density.
+    
+    
+This will display syntax information.
 
     AIP -help
 		
